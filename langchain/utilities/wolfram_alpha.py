@@ -1,7 +1,7 @@
 """Util that calls WolframAlpha."""
 from typing import Any, Dict, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.utils import get_from_dict_or_env
 
@@ -18,7 +18,7 @@ class WolframAlphaAPIWrapper(BaseModel):
 
     """
 
-    wolfram_client: Any  #: :meta private:
+    wolfram_client: Any = PrivateAttr()
     wolfram_alpha_appid: Optional[str] = None
 
     class Config:

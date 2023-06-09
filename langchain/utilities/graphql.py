@@ -1,7 +1,7 @@
 import json
 from typing import Any, Callable, Dict, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 
 class GraphQLAPIWrapper(BaseModel):
@@ -13,8 +13,8 @@ class GraphQLAPIWrapper(BaseModel):
 
     custom_headers: Optional[Dict[str, str]] = None
     graphql_endpoint: str
-    gql_client: Any  #: :meta private:
-    gql_function: Callable[[str], Any]  #: :meta private:
+    gql_client: Any = PrivateAttr()
+    gql_function: Callable[[str], Any] = PrivateAttr()
 
     class Config:
         """Configuration for this pydantic object."""

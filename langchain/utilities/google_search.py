@@ -1,7 +1,7 @@
 """Util that calls Google Search."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.utils import get_from_dict_or_env
 
@@ -45,7 +45,7 @@ class GoogleSearchAPIWrapper(BaseModel):
     .com
     """
 
-    search_engine: Any  #: :meta private:
+    search_engine: Any = PrivateAttr()
     google_api_key: Optional[str] = None
     google_cse_id: Optional[str] = None
     k: int = 10

@@ -1,7 +1,7 @@
 """Util that calls Jira."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.tools.jira.prompt import (
     JIRA_CATCH_ALL_PROMPT,
@@ -16,7 +16,7 @@ from langchain.utils import get_from_dict_or_env
 class JiraAPIWrapper(BaseModel):
     """Wrapper for Jira API."""
 
-    jira: Any  #: :meta private:
+    jira: Any = PrivateAttr()
     jira_username: Optional[str] = None
     jira_api_token: Optional[str] = None
     jira_instance_url: Optional[str] = None

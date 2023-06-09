@@ -2,7 +2,7 @@
 import json
 from typing import Any, Dict, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 
 class LambdaWrapper(BaseModel):
@@ -16,7 +16,7 @@ class LambdaWrapper(BaseModel):
 
     """
 
-    lambda_client: Any  #: :meta private:
+    lambda_client: Any = PrivateAttr()
     function_name: Optional[str] = None
     awslambda_tool_name: Optional[str] = None
     awslambda_tool_description: Optional[str] = None

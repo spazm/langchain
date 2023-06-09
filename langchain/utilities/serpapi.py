@@ -7,7 +7,7 @@ import sys
 from typing import Any, Dict, Optional, Tuple
 
 import aiohttp
-from pydantic import BaseModel, Extra, Field, root_validator
+from pydantic import BaseModel, Extra, Field, PrivateAttr, root_validator
 
 from langchain.utils import get_from_dict_or_env
 
@@ -40,7 +40,7 @@ class SerpAPIWrapper(BaseModel):
             serpapi = SerpAPIWrapper()
     """
 
-    search_engine: Any  #: :meta private:
+    search_engine: Any = PrivateAttr()
     params: dict = Field(
         default={
             "engine": "google",
