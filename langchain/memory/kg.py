@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Type, Union
 
-from pydantic import Field
+from pydantic import Field, PrivateAttr
 
 from langchain.base_language import BaseLanguageModel
 from langchain.chains.llm import LLMChain
@@ -36,7 +36,7 @@ class ConversationKGMemory(BaseChatMemory):
     llm: BaseLanguageModel
     summary_message_cls: Type[BaseMessage] = SystemMessage
     """Number of previous utterances to include in the context."""
-    memory_key: str = "history"  #: :meta private:
+    memory_key: str = PrivateAttr("history")
 
     def load_memory_variables(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
         """Return history buffer."""

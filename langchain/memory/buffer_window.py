@@ -2,6 +2,7 @@ from typing import Any, Dict, List
 
 from langchain.memory.chat_memory import BaseChatMemory
 from langchain.schema import BaseMessage, get_buffer_string
+from pydantic import PrivateAttr
 
 
 class ConversationBufferWindowMemory(BaseChatMemory):
@@ -9,7 +10,7 @@ class ConversationBufferWindowMemory(BaseChatMemory):
 
     human_prefix: str = "Human"
     ai_prefix: str = "AI"
-    memory_key: str = "history"  #: :meta private:
+    memory_key: str = PrivateAttr("history")
     k: int = 5
 
     @property
