@@ -2,7 +2,7 @@
 import re
 from typing import Callable, Dict, List
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, PrivateAttr, validator
 
 from langchain.prompts.example_selector.base import BaseExampleSelector
 from langchain.prompts.prompt import PromptTemplate
@@ -27,7 +27,7 @@ class LengthBasedExampleSelector(BaseExampleSelector, BaseModel):
     max_length: int = 2048
     """Max length for the prompt, beyond which examples are cut."""
 
-    example_text_lengths: List[int] = []  #: :meta private:
+    example_text_lengths: List[int] = PrivateAttr([])
 
     def add_example(self, example: Dict[str, str]) -> None:
         """Add new example to list."""
