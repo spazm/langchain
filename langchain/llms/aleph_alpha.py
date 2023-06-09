@@ -1,7 +1,7 @@
 """Wrapper around Aleph Alpha APIs."""
 from typing import Any, Dict, List, Optional, Sequence
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -26,7 +26,7 @@ class AlephAlpha(LLM):
             alpeh_alpha = AlephAlpha(aleph_alpha_api_key="my-api-key")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model: Optional[str] = "luminous-base"
     """Model name to use."""
 

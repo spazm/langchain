@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Callable, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 from tenacity import (
     before_sleep_log,
     retry,
@@ -62,7 +62,7 @@ class Cohere(LLM):
             cohere = Cohere(model="gptd-instruct-tft", cohere_api_key="my-api-key")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model: Optional[str] = None
     """Model name to use."""
 

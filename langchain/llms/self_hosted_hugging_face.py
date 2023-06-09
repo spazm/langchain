@@ -3,7 +3,7 @@ import importlib.util
 import logging
 from typing import Any, Callable, List, Mapping, Optional
 
-from pydantic import Extra
+from pydantic import Extra, PrivateAttr
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.self_hosted import SelfHostedPipeline
@@ -167,7 +167,7 @@ class SelfHostedHuggingFaceLLM(SelfHostedPipeline):
     """Requirements to install on hardware to inference the model."""
     model_load_fn: Callable = _load_transformer
     """Function to load the model remotely on the server."""
-    inference_fn: Callable = _generate_text  #: :meta private:
+    inference_fn: Callable = PrivateAttr(_generate_text)
     """Inference function to send to the remote hardware."""
 
     class Config:

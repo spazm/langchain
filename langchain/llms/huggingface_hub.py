@@ -1,7 +1,7 @@
 """Wrapper around HuggingFace APIs."""
 from typing import Any, Dict, List, Mapping, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -28,7 +28,7 @@ class HuggingFaceHub(LLM):
             hf = HuggingFaceHub(repo_id="gpt2", huggingfacehub_api_token="my-api-key")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     repo_id: str = DEFAULT_REPO_ID
     """Model name to use."""
     task: Optional[str] = None

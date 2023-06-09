@@ -3,7 +3,7 @@ import re
 import warnings
 from typing import Any, Callable, Dict, Generator, List, Mapping, Optional, Tuple, Union
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForLLMRun,
@@ -14,7 +14,7 @@ from langchain.utils import get_from_dict_or_env
 
 
 class _AnthropicCommon(BaseModel):
-    client: Any = None  #: :meta private:
+    client: Any = PrivateAttr()
     model: str = "claude-v1"
     """Model name to use."""
 

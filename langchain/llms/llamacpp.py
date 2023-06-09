@@ -2,7 +2,7 @@
 import logging
 from typing import Any, Dict, Generator, List, Optional
 
-from pydantic import Field, root_validator
+from pydantic import Field, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -24,7 +24,7 @@ class LlamaCpp(LLM):
             llm = LlamaCppEmbeddings(model_path="/path/to/llama/model")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_path: str
     """The path to the Llama model file."""
 

@@ -2,7 +2,7 @@
 from functools import partial
 from typing import Any, Dict, List, Mapping, Optional, Set
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -34,7 +34,7 @@ class GPT4All(LLM):
     """Token context window."""
 
     n_parts: int = Field(-1, alias="n_parts")
-    """Number of parts to split the model into. 
+    """Number of parts to split the model into.
     If -1, the number of parts is automatically determined."""
 
     seed: int = Field(0, alias="seed")
@@ -95,7 +95,7 @@ class GPT4All(LLM):
     allow_download: bool = False
     """If model does not exist in ~/.cache/gpt4all/, download it."""
 
-    client: Any = None  #: :meta private:
+    client: Any = PrivateAttr(None)
 
     class Config:
         """Configuration for this pydantic object."""
