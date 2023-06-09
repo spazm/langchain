@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 
 from langchain import LLMChain
 from langchain.base_language import BaseLanguageModel
@@ -27,10 +27,10 @@ class GenerativeAgent(BaseModel):
     llm: BaseLanguageModel
     """The underlying language model."""
     verbose: bool = False
-    summary: str = ""  #: :meta private:
+    summary: str = PrivateAttr("")
     """Stateful self-summary generated via reflection on the character's memory."""
 
-    summary_refresh_seconds: int = 3600  #: :meta private:
+    summary_refresh_seconds: int = PrivateAttr(3600)
     """How frequently to re-generate the summary."""
 
     last_refreshed: datetime = Field(default_factory=datetime.now)  # : :meta private:
@@ -79,7 +79,7 @@ class GenerativeAgent(BaseModel):
 {q1}?
 Context from memory:
 {relevant_memories}
-Relevant context: 
+Relevant context:
 """
         )
         entity_name = self._get_entity_from_observation(observation)
