@@ -1,7 +1,7 @@
 """Wrapper around Sagemaker InvokeEndpoint API."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.embeddings.base import Embeddings
 from langchain.llms.sagemaker_endpoint import ContentHandlerBase
@@ -49,7 +49,7 @@ class SagemakerEndpointEmbeddings(BaseModel, Embeddings):
                 credentials_profile_name=credentials_profile_name
             )
     """
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
 
     endpoint_name: str = ""
     """The name of the endpoint from the deployed Sagemaker model.

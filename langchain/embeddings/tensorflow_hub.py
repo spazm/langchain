@@ -1,7 +1,7 @@
 """Wrapper around TensorflowHub embedding models."""
 from typing import Any, List
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel, PrivateAttr, Extra
 
 from langchain.embeddings.base import Embeddings
 
@@ -21,7 +21,7 @@ class TensorflowHubEmbeddings(BaseModel, Embeddings):
             tf = TensorflowHubEmbeddings(model_url=url)
     """
 
-    embed: Any  #: :meta private:
+    embed: Any = PrivateAttr()
     model_url: str = DEFAULT_MODEL_URL
     """Model name to use."""
 

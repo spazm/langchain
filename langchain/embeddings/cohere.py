@@ -1,7 +1,7 @@
 """Wrapper around Cohere embedding models."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.embeddings.base import Embeddings
 from langchain.utils import get_from_dict_or_env
@@ -23,7 +23,7 @@ class CohereEmbeddings(BaseModel, Embeddings):
             )
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model: str = "embed-english-v2.0"
     """Model name to use."""
 
