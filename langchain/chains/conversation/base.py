@@ -1,7 +1,7 @@
 """Chain that carries on a conversation and calls an LLM."""
 from typing import Dict, List
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.chains.conversation.prompt import PROMPT
 from langchain.chains.llm import LLMChain
@@ -25,8 +25,8 @@ class ConversationChain(LLMChain):
     prompt: BasePromptTemplate = PROMPT
     """Default conversation prompt to use."""
 
-    input_key: str = "input"  #: :meta private:
-    output_key: str = "response"  #: :meta private:
+    input_key: str = PrivateAttr("input")
+    output_key: str = PrivateAttr("response")
 
     class Config:
         """Configuration for this pydantic object."""

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForChainRun
 from langchain.chains import LLMChain
@@ -23,9 +23,9 @@ class LLMRequestsChain(Chain):
         default_factory=TextRequestsWrapper, exclude=True
     )
     text_length: int = 8000
-    requests_key: str = "requests_result"  #: :meta private:
-    input_key: str = "url"  #: :meta private:
-    output_key: str = "output"  #: :meta private:
+    requests_key: str = PrivateAttr("requests_result")
+    input_key: str = PrivateAttr("url")
+    output_key: str = PrivateAttr("output")
 
     class Config:
         """Configuration for this pydantic object."""

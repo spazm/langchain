@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import Field, root_validator
+from pydantic import Field, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import (
@@ -24,8 +24,8 @@ class APIChain(Chain):
     api_answer_chain: LLMChain
     requests_wrapper: TextRequestsWrapper = Field(exclude=True)
     api_docs: str
-    question_key: str = "question"  #: :meta private:
-    output_key: str = "output"  #: :meta private:
+    question_key: str = PrivateAttr("question")
+    output_key: str = PrivateAttr("output")
 
     @property
     def input_keys(self) -> List[str]:

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import Field
+from pydantic import Field, PrivateAtt
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -20,8 +20,8 @@ class GraphQAChain(Chain):
     graph: NetworkxEntityGraph = Field(exclude=True)
     entity_extraction_chain: LLMChain
     qa_chain: LLMChain
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
 
     @property
     def input_keys(self) -> List[str]:

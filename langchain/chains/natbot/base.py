@@ -4,7 +4,7 @@ from __future__ import annotations
 import warnings
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -29,10 +29,10 @@ class NatBotChain(Chain):
     """Objective that NatBot is tasked with completing."""
     llm: Optional[BaseLanguageModel] = None
     """[Deprecated] LLM wrapper to use."""
-    input_url_key: str = "url"  #: :meta private:
-    input_browser_content_key: str = "browser_content"  #: :meta private:
-    previous_command: str = ""  #: :meta private:
-    output_key: str = "command"  #: :meta private:
+    input_url_key: str = PrivateAttr("url")
+    input_browser_content_key: str = PrivateAttr("browser_content")
+    previous_command: str = PrivateAttr("")
+    output_key: str = PrivateAttr("command")
 
     class Config:
         """Configuration for this pydantic object."""

@@ -6,7 +6,7 @@ import re
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import (
@@ -33,10 +33,10 @@ class BaseQAWithSourcesChain(Chain, ABC):
 
     combine_documents_chain: BaseCombineDocumentsChain
     """Chain to use to combine documents."""
-    question_key: str = "question"  #: :meta private:
-    input_docs_key: str = "docs"  #: :meta private:
-    answer_key: str = "answer"  #: :meta private:
-    sources_answer_key: str = "sources"  #: :meta private:
+    question_key: str = PrivateAttr("question")
+    input_docs_key: str = PrivateAttr("docs")
+    answer_key: str = PrivateAttr("answer")
+    sources_answer_key: str = PrivateAttr("sources")
     return_source_documents: bool = False
     """Return the source documents."""
 
@@ -170,7 +170,7 @@ class BaseQAWithSourcesChain(Chain, ABC):
 class QAWithSourcesChain(BaseQAWithSourcesChain):
     """Question answering with sources over documents."""
 
-    input_docs_key: str = "docs"  #: :meta private:
+    input_docs_key: str = PrivateAttr("docs")
 
     @property
     def input_keys(self) -> List[str]:

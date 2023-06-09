@@ -4,7 +4,7 @@ from __future__ import annotations
 import warnings
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -39,14 +39,14 @@ class SQLDatabaseChain(Chain):
     """[Deprecated] Prompt to use to translate natural language to SQL."""
     top_k: int = 5
     """Number of results to return from the query"""
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
     return_intermediate_steps: bool = False
     """Whether or not to return the intermediate steps along with the final answer."""
     return_direct: bool = False
     """Whether or not to return the result of querying the SQL table directly."""
     use_query_checker: bool = False
-    """Whether or not the query checker tool should be used to attempt 
+    """Whether or not the query checker tool should be used to attempt
     to fix the initial SQL from the LLM."""
     query_checker_prompt: Optional[BasePromptTemplate] = None
     """The prompt template that should be used by the query checker"""
@@ -209,8 +209,8 @@ class SQLDatabaseSequentialChain(Chain):
 
     decider_chain: LLMChain
     sql_chain: SQLDatabaseChain
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
     return_intermediate_steps: bool = False
 
     @classmethod

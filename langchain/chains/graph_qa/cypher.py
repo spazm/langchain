@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional
 
-from pydantic import Field
+from pydantic import Field, PrivateAttr
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -31,8 +31,8 @@ class GraphCypherQAChain(Chain):
     graph: Neo4jGraph = Field(exclude=True)
     cypher_generation_chain: LLMChain
     qa_chain: LLMChain
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
 
     @property
     def input_keys(self) -> List[str]:

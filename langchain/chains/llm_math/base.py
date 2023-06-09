@@ -7,7 +7,7 @@ import warnings
 from typing import Any, Dict, List, Optional
 
 import numexpr
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import (
@@ -35,8 +35,8 @@ class LLMMathChain(Chain):
     """[Deprecated] LLM wrapper to use."""
     prompt: BasePromptTemplate = PROMPT
     """[Deprecated] Prompt to use to translate to python if necessary."""
-    input_key: str = "question"  #: :meta private:
-    output_key: str = "answer"  #: :meta private:
+    input_key: str = PrivateAttr("question")
+    output_key: str = PrivateAttr("answer")
 
     class Config:
         """Configuration for this pydantic object."""

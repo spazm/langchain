@@ -5,7 +5,7 @@ import logging
 import warnings
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -32,8 +32,8 @@ class LLMBashChain(Chain):
     llm_chain: LLMChain
     llm: Optional[BaseLanguageModel] = None
     """[Deprecated] LLM wrapper to use."""
-    input_key: str = "question"  #: :meta private:
-    output_key: str = "answer"  #: :meta private:
+    input_key: str = PrivateAttr("question")
+    output_key: str = PrivateAttr("answer")
     prompt: BasePromptTemplate = PROMPT
     """[Deprecated]"""
     bash_process: BashProcess = Field(default_factory=BashProcess)  #: :meta private:

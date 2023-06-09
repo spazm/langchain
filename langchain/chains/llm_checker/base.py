@@ -4,7 +4,7 @@ from __future__ import annotations
 import warnings
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -85,8 +85,8 @@ class LLMCheckerChain(Chain):
     """[Deprecated]"""
     revised_answer_prompt: PromptTemplate = REVISED_ANSWER_PROMPT
     """[Deprecated] Prompt to use when questioning the documents."""
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
 
     class Config:
         """Configuration for this pydantic object."""
