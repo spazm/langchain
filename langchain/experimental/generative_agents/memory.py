@@ -9,6 +9,7 @@ from langchain.prompts import PromptTemplate
 from langchain.retrievers import TimeWeightedVectorStoreRetriever
 from langchain.schema import BaseMemory, Document
 from langchain.utils import mock_now
+from pydantic import PrivateAttr
 
 logger = logging.getLogger(__name__)
 
@@ -32,12 +33,12 @@ class GenerativeAgentMemory(BaseMemory):
     importance_weight: float = 0.15
     """How much weight to assign the memory importance."""
 
-    aggregate_importance: float = 0.0  # : :meta private:
+    aggregate_importance: float = PrivateAttr(0.0)
     """Track the sum of the 'importance' of recent memories.
 
     Triggers reflection when it reaches reflection_threshold."""
 
-    max_tokens_limit: int = 1200  # : :meta private:
+    max_tokens_limit: int = PrivateAttr(1200)
     # input keys
     queries_key: str = "queries"
     most_recent_memories_token_key: str = "recent_memories_token"
