@@ -7,7 +7,7 @@ from __future__ import annotations
 import warnings
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -31,7 +31,7 @@ class PALChain(Chain):
     get_answer_expr: str = "print(solution())"
     python_globals: Optional[Dict[str, Any]] = None
     python_locals: Optional[Dict[str, Any]] = None
-    output_key: str = "result"  #: :meta private:
+    output_key: str = PrivateAttr("result")
     return_intermediate_steps: bool = False
 
     class Config:

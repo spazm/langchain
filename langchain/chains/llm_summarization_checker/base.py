@@ -6,7 +6,7 @@ import warnings
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun
@@ -97,8 +97,8 @@ class LLMSummarizationCheckerChain(Chain):
     are_all_true_prompt: PromptTemplate = ARE_ALL_TRUE_PROMPT
     """[Deprecated]"""
 
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
     max_checks: int = 2
     """Maximum number of times to check the assertions. Default to double-checking."""
 

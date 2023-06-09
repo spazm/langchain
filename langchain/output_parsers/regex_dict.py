@@ -4,12 +4,13 @@ import re
 from typing import Dict, Optional
 
 from langchain.schema import BaseOutputParser
+from pydantic import PrivateAttr
 
 
 class RegexDictParser(BaseOutputParser):
     """Class to parse the output into a dictionary."""
 
-    regex_pattern: str = r"{}:\s?([^.'\n']*)\.?"  # : :meta private:
+    regex_pattern: str = PrivateAttr(r"{}:\s?([^.'\n']*)\.?")
     output_key_to_format: Dict[str, str]
     no_update_value: Optional[str] = None
 

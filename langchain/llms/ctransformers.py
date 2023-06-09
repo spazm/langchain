@@ -1,7 +1,7 @@
 """Wrapper around the C Transformers library."""
 from typing import Any, Dict, Optional, Sequence
 
-from pydantic import root_validator
+from pydantic import PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -21,7 +21,7 @@ class CTransformers(LLM):
             llm = CTransformers(model="/path/to/ggml-gpt-2.bin", model_type="gpt2")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
 
     model: str
     """The path to a model file or directory or the name of a Hugging Face Hub

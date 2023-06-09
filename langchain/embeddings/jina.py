@@ -4,14 +4,14 @@ import os
 from typing import Any, Dict, List, Optional
 
 import requests
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 
 from langchain.embeddings.base import Embeddings
 from langchain.utils import get_from_dict_or_env
 
 
 class JinaEmbeddings(BaseModel, Embeddings):
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
 
     model_name: str = "ViT-B-32::openai"
     """Model name to use."""

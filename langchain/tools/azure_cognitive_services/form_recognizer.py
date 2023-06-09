@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from pydantic import root_validator
+from pydantic import PrivateAttr, root_validator
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForToolRun,
@@ -23,9 +23,9 @@ class AzureCogsFormRecognizerTool(BaseTool):
     https://learn.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/get-started-sdks-rest-api?view=form-recog-3.0.0&pivots=programming-language-python
     """
 
-    azure_cogs_key: str = ""  #: :meta private:
-    azure_cogs_endpoint: str = ""  #: :meta private:
-    doc_analysis_client: Any  #: :meta private:
+    azure_cogs_key: str = PrivateAttr("")
+    azure_cogs_endpoint: str = PrivateAttr("")
+    doc_analysis_client: Any = PrivateAttr()
 
     name = "Azure Cognitive Services Form Recognizer"
     description = (

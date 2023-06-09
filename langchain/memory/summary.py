@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Type
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.chains.llm import LLMChain
@@ -41,7 +41,7 @@ class ConversationSummaryMemory(BaseChatMemory, SummarizerMixin):
     """Conversation summarizer to memory."""
 
     buffer: str = ""
-    memory_key: str = "history"  #: :meta private:
+    memory_key: str = PrivateAttr("history")
 
     @classmethod
     def from_messages(

@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Callable, Dict, List, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 from tenacity import (
     before_sleep_log,
     retry,
@@ -77,7 +77,7 @@ def _strip_erroneous_leading_spaces(text: str) -> str:
 
 
 class GooglePalm(BaseLLM, BaseModel):
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     google_api_key: Optional[str]
     model_name: str = "models/text-bison-001"
     """Model name to use."""

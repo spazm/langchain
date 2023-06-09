@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from typing import Any, Dict, List, NamedTuple, Optional, cast
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, PrivateAttr
 from requests import Response
 
 from langchain.base_language import BaseLanguageModel
@@ -34,9 +34,9 @@ class OpenAPIEndpointChain(Chain, BaseModel):
     requests: Requests = Field(exclude=True, default_factory=Requests)
     param_mapping: _ParamMapping = Field(alias="param_mapping")
     return_intermediate_steps: bool = False
-    instructions_key: str = "instructions"  #: :meta private:
-    output_key: str = "output"  #: :meta private:
-    max_text_length: Optional[int] = Field(ge=0)  #: :meta private:
+    instructions_key: str = PrivateAttr("instructions")
+    output_key: str = PrivateAttr("output")
+    max_text_length: Optional[int] = PrivateAttr(Field(ge=0))
 
     @property
     def input_keys(self) -> List[str]:

@@ -20,7 +20,7 @@ from typing import (
     Union,
 )
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 from tenacity import (
     before_sleep_log,
     retry,
@@ -123,7 +123,7 @@ async def acompletion_with_retry(
 class BaseOpenAI(BaseLLM):
     """Wrapper around OpenAI large language models."""
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: str = Field("text-davinci-003", alias="model")
     """Model name to use."""
     temperature: float = 0.7
@@ -654,7 +654,7 @@ class OpenAIChat(BaseLLM):
             openaichat = OpenAIChat(model_name="gpt-3.5-turbo")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: str = "gpt-3.5-turbo"
     """Model name to use."""
     model_kwargs: Dict[str, Any] = Field(default_factory=dict)

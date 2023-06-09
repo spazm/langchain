@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 
 from langchain.embeddings.base import Embeddings
 from langchain.utils import get_from_dict_or_env
@@ -29,7 +29,7 @@ class AlephAlphaAsymmetricSemanticEmbedding(BaseModel, Embeddings):
 
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
 
     model: Optional[str] = "luminous-base"
     """Model name to use."""
@@ -38,13 +38,13 @@ class AlephAlphaAsymmetricSemanticEmbedding(BaseModel, Embeddings):
     normalize: Optional[bool] = True
     """Should returned embeddings be normalized"""
     compress_to_size: Optional[int] = 128
-    """Should the returned embeddings come back as an original 5120-dim vector, 
+    """Should the returned embeddings come back as an original 5120-dim vector,
     or should it be compressed to 128-dim."""
     contextual_control_threshold: Optional[int] = None
-    """Attention control parameters only apply to those tokens that have 
+    """Attention control parameters only apply to those tokens that have
     explicitly been set in the request."""
     control_log_additive: Optional[bool] = True
-    """Apply controls on prompt items by adding the log(control_factor) 
+    """Apply controls on prompt items by adding the log(control_factor)
     to attention scores."""
     aleph_alpha_api_key: Optional[str] = None
     """API key for Aleph Alpha API."""

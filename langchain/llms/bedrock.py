@@ -1,7 +1,7 @@
 import json
 from typing import Any, Dict, List, Mapping, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -67,13 +67,13 @@ class Bedrock(LLM):
             from bedrock_langchain.bedrock_llm import BedrockLLM
 
             llm = BedrockLLM(
-                credentials_profile_name="default", 
+                credentials_profile_name="default",
                 model_id="amazon.titan-tg1-large"
             )
 
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
 
     region_name: Optional[str] = None
     """The aws region e.g., `us-west-2`. Fallsback to AWS_DEFAULT_REGION env variable

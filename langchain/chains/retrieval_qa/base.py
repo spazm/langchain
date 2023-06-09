@@ -5,7 +5,7 @@ import warnings
 from abc import abstractmethod
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import (
@@ -26,8 +26,8 @@ from langchain.vectorstores.base import VectorStore
 class BaseRetrievalQA(Chain):
     combine_documents_chain: BaseCombineDocumentsChain
     """Chain to use to combine the documents."""
-    input_key: str = "query"  #: :meta private:
-    output_key: str = "result"  #: :meta private:
+    input_key: str = PrivateAttr("query")
+    output_key: str = PrivateAttr("result")
     return_source_documents: bool = False
     """Return the source documents."""
 

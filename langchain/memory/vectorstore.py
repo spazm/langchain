@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import Field
+from pydantic import Field, PrivateAttr
 
 from langchain.memory.chat_memory import BaseMemory
 from langchain.memory.utils import get_prompt_input_key
@@ -16,7 +16,7 @@ class VectorStoreRetrieverMemory(BaseMemory):
     retriever: VectorStoreRetriever = Field(exclude=True)
     """VectorStoreRetriever object to connect to."""
 
-    memory_key: str = "history"  #: :meta private:
+    memory_key: str = PrivateAttr("history")
     """Key name to locate the memories in the result of load_memory_variables."""
 
     input_key: Optional[str] = None

@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, Optional
 
-from pydantic import root_validator
+from pydantic import PrivateAttr, root_validator
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForToolRun,
@@ -23,10 +23,10 @@ class AzureCogsImageAnalysisTool(BaseTool):
     https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40
     """
 
-    azure_cogs_key: str = ""  #: :meta private:
-    azure_cogs_endpoint: str = ""  #: :meta private:
-    vision_service: Any  #: :meta private:
-    analysis_options: Any  #: :meta private:
+    azure_cogs_key: str = PrivateAttr("")
+    azure_cogs_endpoint: str = PrivateAttr("")
+    vision_service: Any = PrivateAttr()
+    analysis_options: Any = PrivateAttr()
 
     name = "Azure Cognitive Services Image Analysis"
     description = (

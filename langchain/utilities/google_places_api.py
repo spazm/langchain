@@ -4,7 +4,7 @@
 import logging
 from typing import Any, Dict, Optional
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.utils import get_from_dict_or_env
 
@@ -30,7 +30,7 @@ class GooglePlacesAPIWrapper(BaseModel):
     """
 
     gplaces_api_key: Optional[str] = None
-    google_map_client: Any  #: :meta private:
+    google_map_client: Any = PrivateAttr()
     top_k_results: Optional[int] = None
 
     class Config:

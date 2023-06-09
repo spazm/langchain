@@ -1,7 +1,7 @@
 """Wrapper around HazyResearch's Manifest library."""
 from typing import Any, Dict, List, Mapping, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -10,7 +10,7 @@ from langchain.llms.base import LLM
 class ManifestWrapper(LLM):
     """Wrapper around HazyResearch's Manifest library."""
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     llm_kwargs: Optional[Dict] = None
 
     class Config:

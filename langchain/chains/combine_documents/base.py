@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Tuple
 
-from pydantic import Field
+from pydantic import Field, PrivateAttr
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForChainRun,
@@ -36,8 +36,8 @@ def format_document(doc: Document, prompt: BasePromptTemplate) -> str:
 class BaseCombineDocumentsChain(Chain, ABC):
     """Base interface for chains combining documents."""
 
-    input_key: str = "input_documents"  #: :meta private:
-    output_key: str = "output_text"  #: :meta private:
+    input_key: str = PrivateAttr("input_documents")
+    output_key: str = PrivateAttr("output_text")
 
     @property
     def input_keys(self) -> List[str]:
@@ -106,7 +106,7 @@ class BaseCombineDocumentsChain(Chain, ABC):
 class AnalyzeDocumentChain(Chain):
     """Chain that splits documents, then analyzes it in pieces."""
 
-    input_key: str = "input_document"  #: :meta private:
+    input_key: str = PrivateAttr("input_document")
     text_splitter: TextSplitter = Field(default_factory=RecursiveCharacterTextSplitter)
     combine_docs_chain: BaseCombineDocumentsChain
 

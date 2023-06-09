@@ -4,6 +4,7 @@ import logging
 from typing import Any, Callable, List, Optional
 
 from langchain.embeddings.self_hosted import SelfHostedEmbeddings
+from pydantic import PrivateAttr
 
 DEFAULT_MODEL_NAME = "sentence-transformers/all-mpnet-base-v2"
 DEFAULT_INSTRUCT_MODEL = "hkunlp/instructor-large"
@@ -77,7 +78,7 @@ class SelfHostedHuggingFaceEmbeddings(SelfHostedEmbeddings):
             hf = SelfHostedHuggingFaceEmbeddings(model_name=model_name, hardware=gpu)
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_id: str = DEFAULT_MODEL_NAME
     """Model name to use."""
     model_reqs: List[str] = ["./", "sentence_transformers", "torch"]

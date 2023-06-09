@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping, Optional
 
-from pydantic import Extra
+from pydantic import Extra, PrivateAttr
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import CallbackManagerForChainRun, Callbacks
@@ -28,8 +28,8 @@ class MapReduceChain(Chain):
     """Chain to use to combine documents."""
     text_splitter: TextSplitter
     """Text splitter to use."""
-    input_key: str = "input_text"  #: :meta private:
-    output_key: str = "output_text"  #: :meta private:
+    input_key: str = PrivateAttr("input_text")
+    output_key: str = PrivateAttr("output_text")
 
     @classmethod
     def from_params(

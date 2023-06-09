@@ -1,7 +1,7 @@
 """Chain pipeline where the outputs of one step feed directly into next."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForChainRun,
@@ -16,7 +16,7 @@ class SequentialChain(Chain):
 
     chains: List[Chain]
     input_variables: List[str]
-    output_variables: List[str]  #: :meta private:
+    output_variables: List[str] = PrivateAttr()
     return_all: bool = False
 
     class Config:
@@ -124,8 +124,8 @@ class SimpleSequentialChain(Chain):
 
     chains: List[Chain]
     strip_outputs: bool = False
-    input_key: str = "input"  #: :meta private:
-    output_key: str = "output"  #: :meta private:
+    input_key: str = PrivateAttr("input")
+    output_key: str = PrivateAttr("output")
 
     class Config:
         """Configuration for this pydantic object."""

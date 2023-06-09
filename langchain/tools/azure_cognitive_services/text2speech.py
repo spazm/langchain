@@ -4,7 +4,7 @@ import logging
 import tempfile
 from typing import Any, Dict, Optional
 
-from pydantic import root_validator
+from pydantic import PrivateAttr, root_validator
 
 from langchain.callbacks.manager import (
     AsyncCallbackManagerForToolRun,
@@ -23,10 +23,10 @@ class AzureCogsText2SpeechTool(BaseTool):
     https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started-text-to-speech?pivots=programming-language-python
     """
 
-    azure_cogs_key: str = ""  #: :meta private:
-    azure_cogs_region: str = ""  #: :meta private:
-    speech_language: str = "en-US"  #: :meta private:
-    speech_config: Any  #: :meta private:
+    azure_cogs_key: str = PrivateAttr("")
+    azure_cogs_region: str = PrivateAttr("")
+    speech_language: str = PrivateAttr("en-US")
+    speech_config: Any = PrivateAttr()
 
     name = "Azure Cognitive Services Text2Speech"
     description = (

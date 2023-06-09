@@ -1,7 +1,7 @@
 """Wrapper around Google VertexAI models."""
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 
 class _VertexAICommon(BaseModel):
-    client: "_LanguageModel" = None  #: :meta private:
+    client: "_LanguageModel" = PrivateAttr(None)
     model_name: str
     "Model name to use."
     temperature: float = 0.0

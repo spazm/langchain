@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
-from pydantic import Extra
+from pydantic import Extra, PrivateAttr
 
 from langchain.base_language import BaseLanguageModel
 from langchain.callbacks.manager import (
@@ -37,7 +37,7 @@ class LLMChain(Chain):
     prompt: BasePromptTemplate
     """Prompt object to use."""
     llm: BaseLanguageModel
-    output_key: str = "text"  #: :meta private:
+    output_key: str = PrivateAttr("text")
 
     class Config:
         """Configuration for this pydantic object."""

@@ -1,7 +1,7 @@
 """Wrapper around NLPCloud APIs."""
 from typing import Any, Dict, List, Mapping, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -21,7 +21,7 @@ class NLPCloud(LLM):
             nlpcloud = NLPCloud(model="gpt-neox-20b")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: str = "finetuned-gpt-neox-20b"
     """Model name to use."""
     temperature: float = 0.7

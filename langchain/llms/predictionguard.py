@@ -2,7 +2,7 @@
 import logging
 from typing import Any, Dict, List, Optional
 
-from pydantic import Extra, root_validator
+from pydantic import Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -30,7 +30,7 @@ class PredictionGuard(LLM):
                                     })
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model: Optional[str] = "MPT-7B-Instruct"
     """Model name to use."""
 
