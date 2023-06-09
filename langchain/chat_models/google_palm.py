@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Mapping, Optional
 
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, PrivateAttr, root_validator
 from tenacity import (
     before_sleep_log,
     retry,
@@ -229,7 +229,7 @@ class ChatGooglePalm(BaseChatModel, BaseModel):
 
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: str = "models/chat-bison-001"
     """Model name to use."""
     google_api_key: Optional[str] = None
