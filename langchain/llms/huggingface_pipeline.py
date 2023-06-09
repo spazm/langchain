@@ -3,7 +3,7 @@ import importlib.util
 import logging
 from typing import Any, List, Mapping, Optional
 
-from pydantic import Extra
+from pydantic import Extra, PrivateAttr
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -47,7 +47,7 @@ class HuggingFacePipeline(LLM):
             hf = HuggingFacePipeline(pipeline=pipe)
     """
 
-    pipeline: Any  #: :meta private:
+    pipeline: Any = PrivateAttr
     model_id: str = DEFAULT_MODEL_ID
     """Model name to use."""
     model_kwargs: Optional[dict] = None

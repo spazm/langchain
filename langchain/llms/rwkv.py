@@ -5,7 +5,7 @@ Based on https://github.com/saharNooby/rwkv.cpp/blob/master/rwkv/chat_with_bot.p
 """
 from typing import Any, Dict, List, Mapping, Optional, Set
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -62,15 +62,15 @@ class RWKV(LLM, BaseModel):
     max_tokens_per_generation: int = 256
     """Maximum number of tokens to generate."""
 
-    client: Any = None  #: :meta private:
+    client: Any = PrivateAttr(None)
 
-    tokenizer: Any = None  #: :meta private:
+    tokenizer: Any = PrivateAttr(None)
 
-    pipeline: Any = None  #: :meta private:
+    pipeline: Any = PrivateAttr(None)
 
-    model_tokens: Any = None  #: :meta private:
+    model_tokens: Any = PrivateAttr(None)
 
-    model_state: Any = None  #: :meta private:
+    model_state: Any = PrivateAttr(None)
 
     class Config:
         """Configuration for this pydantic object."""

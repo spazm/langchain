@@ -4,7 +4,7 @@ import logging
 import pickle
 from typing import Any, Callable, List, Mapping, Optional
 
-from pydantic import Extra
+from pydantic import Extra, PrivateAttr
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
@@ -125,9 +125,9 @@ class SelfHostedPipeline(LLM):
             )
     """
 
-    pipeline_ref: Any  #: :meta private:
-    client: Any  #: :meta private:
-    inference_fn: Callable = _generate_text  #: :meta private:
+    pipeline_ref: Any = PrivateAttr()
+    client: Any = PrivateAttr()
+    inference_fn: Callable = PrivateAttr(_generate_text)
     """Inference function to send to the remote hardware."""
     hardware: Any
     """Remote hardware to send the inference function to."""
