@@ -15,7 +15,7 @@ from typing import (
     Union,
 )
 
-from pydantic import Extra, Field, root_validator
+from pydantic import Extra, Field, PrivateAttr, root_validator
 from tenacity import (
     before_sleep_log,
     retry,
@@ -136,7 +136,7 @@ class ChatOpenAI(BaseChatModel):
             openai = ChatOpenAI(model_name="gpt-3.5-turbo")
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: str = Field(default="gpt-3.5-turbo", alias="model")
     """Model name to use."""
     temperature: float = 0.7
@@ -144,7 +144,7 @@ class ChatOpenAI(BaseChatModel):
     model_kwargs: Dict[str, Any] = Field(default_factory=dict)
     """Holds any model parameters valid for `create` call not explicitly specified."""
     openai_api_key: Optional[str] = None
-    """Base URL path for API requests, 
+    """Base URL path for API requests,
     leave blank if not using a proxy or service emulator."""
     openai_api_base: Optional[str] = None
     openai_organization: Optional[str] = None
