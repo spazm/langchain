@@ -1,7 +1,7 @@
 """Pass input through a moderation endpoint."""
 from typing import Any, Dict, List, Optional
 
-from pydantic import root_validator
+from pydantic import PrivateAttr, root_validator
 
 from langchain.callbacks.manager import CallbackManagerForChainRun
 from langchain.chains.base import Chain
@@ -24,13 +24,13 @@ class OpenAIModerationChain(Chain):
             moderation = OpenAIModerationChain()
     """
 
-    client: Any  #: :meta private:
+    client: Any = PrivateAttr()
     model_name: Optional[str] = None
     """Moderation model name to use."""
     error: bool = False
     """Whether or not to error if bad content was found."""
-    input_key: str = "input"  #: :meta private:
-    output_key: str = "output"  #: :meta private:
+    input_key: str = PrivateAttr("input")
+    output_key: str = PrivateAttr("output")
     openai_api_key: Optional[str] = None
     openai_organization: Optional[str] = None
 
