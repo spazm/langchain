@@ -3,7 +3,7 @@ import logging
 import os
 from typing import Any, Dict, List
 
-from pydantic import BaseModel, Extra, root_validator
+from pydantic import BaseModel, Extra, root_validator, PrivateAttr
 
 from langchain.schema import Document
 
@@ -32,8 +32,8 @@ class ArxivAPIWrapper(BaseModel):
 
     """
 
-    arxiv_search: Any  #: :meta private:
-    arxiv_exceptions: Any  # :meta private:
+    arxiv_search: Any = PrivateAttr()
+    arxiv_exceptions: Any = PrivateAttr()
     top_k_results: int = 3
     ARXIV_MAX_QUERY_LENGTH = 300
     load_max_docs: int = 100
